@@ -20,8 +20,10 @@ services:
       context: ./front
       dockerfile: Dockerfile.dev
     restart: always
+    environment:
+      PORT: ${FRONT_END_PORT}
     ports:
-      - "11001:3000"
+      - "11001:${FRONT_END_PORT}"
     volumes:
       - ./front/src:/app/src
       - ./front/static:/app/static
@@ -44,6 +46,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       PORT: ${BACK_END_PORT}
       JWT_SECRET: ${JWT_SECRET}
+      DATABASE_URL: ${BACK_END_DATABASE_URL}
 
 volumes:
   matchmaking-vol:
