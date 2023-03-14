@@ -23,6 +23,7 @@ services:
     environment:
       PORT: ${FRONT_END_PORT}
       VITE_API_URL: ${API_URL}
+      VITE_EXTERNAL_API_URL: ${EXTERNAL_API_URL}
     ports:
       - "11001:${FRONT_END_PORT}"
     volumes:
