@@ -5,3 +5,8 @@ start-dev:
 install-dependencies:
 	cd ./back && yarn install
 	cd ./front && yarn install
+
+setup:
+	make install-dependencies
+	chmod +x init-db.sh
+	make start-dev
