@@ -13,9 +13,17 @@ jobs:
           submodules: true
       - name: Install dependencies
         run: touch .env && make install-dependencies
-      - name: Run linting
+      - name: Run linting back
         env:
           PA_TOKEN: ${{ secrets.PAT_SECRET }}
         run: |
           git clone -b $GITHUB_REF_NAME "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-back.git" back
-          make fix-all
+          cd back/ && yarn install
+          yarn run lint && yarn run format
+      - name: Run linting front
+        env:
+          PA_TOKEN: ${{ secrets.PAT_SECRET }}
+        run: |
+          git clone -b $GITHUB_REF_NAME "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-front.git" front
+          cd front/ && yarn install
+          yarn run lint && yarn run format
