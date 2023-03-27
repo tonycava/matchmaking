@@ -34,4 +34,5 @@ jobs:
           git clone -b $GITHUB_REF_NAME "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-front.git" front
           
           cd front/ && yarn install
+          npx prettier --write .
           yarn run lint && yarn run format
