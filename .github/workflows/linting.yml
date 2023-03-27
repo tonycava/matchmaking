@@ -69,7 +69,7 @@ jobs:
 
       - name: Install dependencies
         run: touch .env && make install-dependencies
-      - name: Run integration tests
+      - name: Run integration tests back
         run: |
           cd back/back/ && npx prisma db push --schema=./prisma/schema.prisma
           make test-backend
