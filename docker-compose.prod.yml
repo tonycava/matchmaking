@@ -18,8 +18,7 @@ services:
   front:
     container_name: matchmaking_front
     build:
-      context: ./front
-      dockerfile: Dockerfile.prod
+      dockerfile: ./front/Dockerfile.prod
     restart: always
     environment:
       PORT: ${FRONT_END_PORT}
@@ -31,8 +30,7 @@ services:
   back:
     container_name: matchmaking_back
     build:
-      context: ./back
-      dockerfile: Dockerfile.prod
+      dockerfile: ./back/Dockerfile.prod
     restart: always
     ports:
       - "8090:${BACK_END_PORT}"
