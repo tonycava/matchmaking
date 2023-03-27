@@ -1,3 +1,6 @@
+include .env
+export
+
 start-dev:
 	docker-compose -f docker-compose.dev.yml down
 	docker-compose -f docker-compose.dev.yml up --build
@@ -37,3 +40,7 @@ git-merge:
 	git checkout $(into) && git merge $(from)
 	cd front && git checkout $(into) && git merge $(from)
 	cd back && git checkout $(into) && git merge $(from)
+
+# TESTING
+test-auth:
+	cd back && . ../.env && JWT_SECRET=${JWT_SECRET} && DATABASE_URL=${EXTERNAL_BACK_END_DATABASE_URL} yarn test
