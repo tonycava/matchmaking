@@ -9,7 +9,7 @@ platform:
 steps:
   - name: environnement
     commands:
-      - ls -la /home/tonycava/matchmaking/
+      - ls -a /home/tonycava/matchmaking/
       - cp /home/tonycava/matchmaking/.env .
 
   - name: stop-previous-version
