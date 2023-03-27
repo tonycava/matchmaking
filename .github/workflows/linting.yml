@@ -21,7 +21,7 @@ jobs:
           
           git clone -b $GITHUB_REF_NAME "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-back.git" back
           
-          yarn install
+          cd back/ && yarn install
           yarn run lint && yarn run format
 
       - name: Run linting front
@@ -33,5 +33,5 @@ jobs:
           
           git clone -b $GITHUB_REF_NAME "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-front.git" front
           
-          yarn install
+          cd front/ && yarn install
           yarn run lint && yarn run format
