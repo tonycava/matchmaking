@@ -14,6 +14,6 @@ jobs:
       - name: Install dependencies
         run: touch .env && make install-dependencies
       - name: Run linting
-        run: cd back && make fix-all
+        run: make fix-all
         with:
-          args: --fix --ignore-path .gitignore
+          args: --fix
