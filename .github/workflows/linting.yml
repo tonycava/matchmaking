@@ -12,6 +12,6 @@ jobs:
         with:
           submodules: true
       - name: Install dependencies
-        run: make install-dependencies
+        run: touch .env && make install-dependencies
       - name: Run linting
         run: make fix-all
