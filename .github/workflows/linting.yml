@@ -15,5 +15,3 @@ jobs:
         run: touch .env && make install-dependencies
       - name: Run linting
         run: make fix-all
-        with:
-          args: --fix
