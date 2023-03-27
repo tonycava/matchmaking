@@ -69,6 +69,8 @@ jobs:
 
       - name: Install dependencies
         run: touch .env && make install-dependencies
+      - name: Database url
+        run: echo $DATABASE_URL
       - name: Run integration tests back
         run: |
           cd back/back/ && npx prisma db push --schema=./prisma/schema.prisma
