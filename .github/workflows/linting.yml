@@ -14,4 +14,4 @@ jobs:
       - name: Install dependencies
         run: touch .env && make install-dependencies
       - name: Run linting
-        run: make fix-all
+        run: ls -la && make fix-all
