@@ -1,0 +1,16 @@
+name: Lint matchmaking CI
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Lint
+        with:
+          submodules: true
+      - name: Install dependencies
+        run: make install-dependencies
+      - name: Run linting
+        run: make fix-all
