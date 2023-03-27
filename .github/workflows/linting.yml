@@ -13,7 +13,62 @@ jobs:
           submodules: true
       - name: Install dependencies
         run: touch .env && make install-dependencies
-      - name: Run linting
-        run: cd back && make fix-all
+      - name: Run linting back
+        env:
+          PA_TOKEN: ${{ secrets.PA_TOKEN }}
+        run: |
+          cd back/
+          
+          git clone -b $GITHUB_REF_NAME "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-back.git" back
+          
+          cd back/ && yarn install
+          yarn run lint && yarn run format
+
+      - name: Run linting front
+        env:
+          PA_TOKEN: ${{ secrets.PA_TOKEN }}
+        run: |
+          
+          cd front/
+          
+          git clone -b $GITHUB_REF_NAME "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-front.git" front
+          
+          cd front/ && yarn install
+          npx prettier --write .
+          yarn run lint && yarn run format
+
+  back-integration-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: matchmaking
+          POSTGRES_PASSWORD: matchmaking
+          POSTGRES_DB: matchmaking
+        ports:
+            - 11000:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      TEST_DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
+      PA_TOKEN: ${{ secrets.PA_TOKEN }}
+      JWT_SECRET: secret
+      EXTERNAL_BACK_END_DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
+      DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
-          args: deploy --dir=app/public --prod
+          node-version: '16.x'
+      - run: |
+          
+          git clone "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-back.git" back
+          cd back/ && git switch origin/$GITHUB_REF_NAME --detach  
+
+      - name: Install dependencies
+        run: touch .env && make install-dependencies
+      - name: Run integration tests back
+        run: |
+          cd back/ && npx prisma db push --schema=./prisma/schema.prisma
+          cd ../ 
+          make test-backend
