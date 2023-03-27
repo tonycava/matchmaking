@@ -14,4 +14,8 @@ jobs:
       - name: Install dependencies
         run: touch .env && make install-dependencies
       - name: Run linting
-        run: make fix-all
+        env:
+          PA_TOKEN: ${{ secrets.PAT_SECRET }}
+        run: |
+          git clone -b $GITHUB_REF_NAME "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-back.git" back
+          make fix-all
