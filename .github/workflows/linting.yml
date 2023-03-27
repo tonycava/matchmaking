@@ -66,7 +66,8 @@ jobs:
           git clone "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-back.git" back
           cd back/ && git switch origin/$GITHUB_REF_NAME --detach && cd ..    
 
-      - run: make install-dependencies
+      - name: Install dependencies
+        run: touch .env && make install-dependencies
       # Create the database
       - run: cd back && npx prisma db push --schema=./prisma/schema.test.prisma
       - run: make test-backend
