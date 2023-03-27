@@ -16,4 +16,4 @@ jobs:
       - name: Run linting
         run: cd back && make fix-all
         with:
-          args: deploy --dir=app/public --prod
+          args: --fix --ignore-path .gitignore
