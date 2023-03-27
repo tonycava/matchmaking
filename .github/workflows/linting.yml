@@ -69,5 +69,5 @@ jobs:
       - name: Install dependencies
         run: touch .env && make install-dependencies
       # Create the database
-      - run: cd back/ && npx prisma db push --schema=./prisma/schema.prisma
+      - run: cd back/ && DATABASE_URL=${EXTERNAL_BACK_END_DATABASE_URL} && npx prisma db push --schema=./prisma/schema.prisma
       - run: make test-backend
