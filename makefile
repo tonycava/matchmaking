@@ -42,5 +42,5 @@ git-merge:
 	cd back && git checkout $(into) && git merge $(from)
 
 # TESTING
-test-auth:
+test-backend:
 	cd back && . ../.env && JWT_SECRET=${JWT_SECRET} && DATABASE_URL=${EXTERNAL_BACK_END_DATABASE_URL} yarn test
