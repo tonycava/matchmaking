@@ -16,7 +16,8 @@ jobs:
           PA_TOKEN: ${{ secrets.PA_TOKEN }}
 
         run: |
-          git pull --recurse-submodules=true
+          rm -rf back/ front/
+          git submodule update --force --recursive --init --remote
           
           cd back/
           
