@@ -52,7 +52,7 @@ jobs:
     env:
       TEST_DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
       PA_TOKEN: ${{ secrets.PA_TOKEN }}
-      JWT_SECRET: secret
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
       EXTERNAL_BACK_END_DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
       DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
     steps:
