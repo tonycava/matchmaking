@@ -20,14 +20,12 @@ jobs:
 
       - name: Run linting back
         run: |
-          cd back/
-          git checkout $GITHUB_REF_NAME
+          cd back/ && git checkout $GITHUB_REF_NAME && cd ..
           make lint-backend
 
       - name: Run linting front
         run: |
-          cd front/ 
-          git checkout $GITHUB_REF_NAME
+          cd front/ && git checkout $GITHUB_REF_NAME && cd ..
           make lint-frontend
   
 
