@@ -47,7 +47,7 @@ jobs:
           POSTGRES_PASSWORD: matchmaking
           POSTGRES_DB: matchmaking
         ports:
-          - 5432:5432
+            - 11000:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     env:
       TEST_DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
@@ -69,8 +69,6 @@ jobs:
 
       - name: Install dependencies
         run: touch .env && make install-dependencies
-      - name: Database url
-        run: echo $EXTERNAL_BACK_END_DATABASE_URL
       - name: Run integration tests back
         run: |
           cd back/back/ && npx prisma db push --schema=./prisma/schema.prisma
