@@ -20,7 +20,7 @@ steps:
 
   - name: stop-previous-version
     commands:
-      - docker-compose -f docker-compose.prod.yml down | true
+      - docker compose -f docker-compose.prod.yml down | true
 
   - name: deploy
     commands:
