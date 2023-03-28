@@ -9,7 +9,7 @@ platform:
 steps:
   - name: submodules
     commands:
-      - git submodule update --init --recursive
+      - git submodule update --force --recursive --init --remote
       - cd back/ && git checkout main && cd ..
       - cd front/ && git checkout main && cd ..
 
