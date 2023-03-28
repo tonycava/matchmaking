@@ -1,6 +1,6 @@
 name: Lint matchmaking CI
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   lint:
@@ -17,8 +17,11 @@ jobs:
 
         run: |
           cd back/
+          
+          git checkout $GITHUB_REF_NAME
+          
           git switch origin/$GITHUB_REF_NAME --detach
-  
+          
           yarn install && yarn run lint && yarn run format
 
       - name: Run linting front
@@ -36,7 +39,7 @@ jobs:
           POSTGRES_PASSWORD: matchmaking
           POSTGRES_DB: matchmaking
         ports:
-            - 11000:5432
+          - 11000:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     env:
       TEST_DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
