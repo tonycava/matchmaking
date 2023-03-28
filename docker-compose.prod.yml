@@ -45,5 +45,6 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       DATABASE_URL: ${BACK_END_DATABASE_URL}
 
+
 volumes:
   matchmaking-vol:
