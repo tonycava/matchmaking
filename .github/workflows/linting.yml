@@ -62,8 +62,6 @@ jobs:
           node-version: '16.x'
       - run: |
           
-          cd back/
-          
           git clone "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-back.git" back
           cd back/ && git switch origin/$GITHUB_REF_NAME --detach  
 
@@ -71,9 +69,6 @@ jobs:
         run: touch .env && make install-dependencies
       - name: Run integration tests back
         run: |
-          cd back/back/ && npx prisma db push --schema=./prisma/schema.prisma
+          cd back/ && npx prisma db push --schema=./prisma/schema.prisma
           cd ../
-          cp back/ /home/runner/work/matchmaking/matchmaking/
-          cd ../ 
-          ls -la
           make test-backend
