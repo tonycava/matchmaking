@@ -72,6 +72,8 @@ jobs:
       - name: Run integration tests back
         run: |
           cd back/back/ && npx prisma db push --schema=./prisma/schema.prisma
-          cd ../../
+          cd ../
+          mv back/ ../
+          cd ../ 
           ls -la
           make test-backend
