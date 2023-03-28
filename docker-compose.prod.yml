@@ -23,8 +23,8 @@ services:
     restart: always
     environment:
       PORT: ${FRONT_END_PORT}
-      VITE_API_URL: ${API_URL}
-      VITE_EXTERNAL_API_URL: ${EXTERNAL_API_URL}
+      PUBLIC_API_URL: ${API_URL}
+      PUBLIC_EXTERNAL_API_URL: ${EXTERNAL_API_URL}
     ports:
       - "8089:${FRONT_END_PORT}"
 
