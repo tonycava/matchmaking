@@ -16,8 +16,6 @@ jobs:
           PA_TOKEN: ${{ secrets.PA_TOKEN }}
 
         run: |
-          git submodule update --force --recursive --init --remote
-          
           cd back/
           git switch origin/$GITHUB_REF_NAME --detach
   
