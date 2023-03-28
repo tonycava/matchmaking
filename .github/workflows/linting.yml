@@ -73,7 +73,7 @@ jobs:
         run: |
           cd back/back/ && npx prisma db push --schema=./prisma/schema.prisma
           cd ../
-          mv back/ ../
+          mv back/ /home/runner/work/matchmaking/matchmaking/
           cd ../ 
           ls -la
           make test-backend
