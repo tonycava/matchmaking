@@ -14,19 +14,20 @@ jobs:
       - name: Run linting back
         env:
           PA_TOKEN: ${{ secrets.PA_TOKEN }}
-        run: |          
-          git clone -b $GITHUB_REF_NAME "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-back.git" back
+
+        run: |
+          git submodule update --force --recursive --init --remote
           
-          cd back/ && yarn install
-          yarn run lint && yarn run format
+          cd back/
+          git switch origin/$GITHUB_REF_NAME --detach
+  
+          yarn install && yarn run lint && yarn run format
 
       - name: Run linting front
         run: |
-          git clone -b $GITHUB_REF_NAME "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-front.git" front
           
-          cd front/ && yarn install
-          yarn run lint && yarn run format
-
+          cd front/ 
+          yarn install && yarn run format && yarn run lint && yarn run check
   back-integration-test:
     runs-on: ubuntu-latest
     services:
