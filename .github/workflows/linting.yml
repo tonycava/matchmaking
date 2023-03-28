@@ -9,29 +9,28 @@ jobs:
       - uses: actions/checkout@v3
       - name: Lint
         uses: actions/setup-node@v2
-      - name: Install dependencies
-        run: touch .env && make install-dependencies
-      - name: Run linting back
-        env:
-          PA_TOKEN: ${{ secrets.PA_TOKEN }}
 
+      - name: Init fake .env
+        run: touch .env
+
+      - name: Re init project
         run: |
           rm -rf back/ front/
           git submodule update --force --recursive --init --remote
-          
+
+      - name: Run linting back
+        run: |
           cd back/
-          
           git checkout $GITHUB_REF_NAME
-          
-          git switch origin/$GITHUB_REF_NAME --detach
-          
-          yarn install && yarn run lint && yarn run format
+          make lint-backend
 
       - name: Run linting front
         run: |
-          
           cd front/ 
-          yarn install && yarn run format && yarn run lint && yarn run check
+          git checkout $GITHUB_REF_NAME
+          make lint-frontend
+  
+
   back-integration-test:
     runs-on: ubuntu-latest
     services:
@@ -55,7 +54,6 @@ jobs:
         with:
           node-version: '16.x'
       - run: |
-          
           git clone "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-back.git" back
           cd back/ && git switch origin/$GITHUB_REF_NAME --detach  
 
@@ -63,6 +61,5 @@ jobs:
         run: touch .env && make install-dependencies
       - name: Run integration tests back
         run: |
-          cd back/ && npx prisma db push --schema=./prisma/schema.prisma
-          cd ../ 
+          cd back/ && npx prisma db push && cd ../ 
           make test-backend
