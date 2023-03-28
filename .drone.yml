@@ -15,6 +15,7 @@ steps:
 
   - name: environnement
     commands:
+      - ls -la /home/tonycava
       - cp /home/tonycava/matchmaking/.env .
 
   - name: stop-previous-version
