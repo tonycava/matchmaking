@@ -16,10 +16,11 @@ jobs:
           PA_TOKEN: ${{ secrets.PA_TOKEN }}
 
         run: |
+          git pull --recurse-submodules=true
+          
           cd back/
           
           git checkout $GITHUB_REF_NAME
-          git pull
           
           git switch origin/$GITHUB_REF_NAME --detach
           
