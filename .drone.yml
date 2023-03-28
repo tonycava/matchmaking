@@ -10,7 +10,7 @@ steps:
   - name: submodules
     commands:
       - git submodule update --init --recursive
-      - git pull --recurse-submodule
+      - git pull --recurse-submodule main
 
   - name: environnement
     commands:
