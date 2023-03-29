@@ -44,7 +44,7 @@ jobs:
     env:
       PA_TOKEN: ${{ secrets.PA_TOKEN }}
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      BACK_END_DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
+      DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1

@@ -41,7 +41,7 @@ git-merge:
 
 # TESTING
 test-backend:
-	cd back && DATABASE_URL=${BACK_END_DATABASE_URL} yarn test
+	cd back && DATABASE_URL=${DATABASE_URL} yarn test
 
 lint-backend:
 	cd back/ && yarn install && yarn run lint && yarn run format
