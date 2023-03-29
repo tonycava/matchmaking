@@ -44,3 +44,9 @@ git-merge:
 # TESTING
 test-backend:
 	cd back && . ../.env && JWT_SECRET=${JWT_SECRET} && DATABASE_URL=${EXTERNAL_BACK_END_DATABASE_URL} yarn test
+
+lint-backend:
+	cd back/ && yarn install && yarn run lint && yarn run format
+
+lint-frontend:
+	cd front/ && yarn install && yarn run format && yarn run lint && yarn run check
