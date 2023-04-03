@@ -17,6 +17,7 @@ jobs:
         run: |
           rm -rf back/ front/
           git submodule update --force --recursive --init --remote
+          cd front/ && git checkout $GITHUB_REF_NAME && cd ..
       - name: Install dependencies
         run: make install-dependencies
       - name: Run unit tests
