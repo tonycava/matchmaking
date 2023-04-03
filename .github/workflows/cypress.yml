@@ -15,8 +15,8 @@ jobs:
         run: |
           rm -rf back/ front/
           git submodule update --force --recursive --init --remote
-      - name: Install dependencies
-        run: make install-dependencies
+      - name: cd
+        run: cd front/ && git checkout $GITHUB_REF_NAME && cd ../..
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
