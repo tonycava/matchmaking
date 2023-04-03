@@ -18,7 +18,7 @@ jobs:
       - name: cd
         run: cd front/ && git checkout $GITHUB_REF_NAME
       - name: Cypress run
-        command: cd front/
+        run: cd front/
         uses: cypress-io/github-action@v5
         with:
           # Starts web server for E2E tests - replace with your own server invocation
