@@ -38,6 +38,5 @@ jobs:
       - name: start server
         run: |
           cd front/ && git checkout $GITHUB_REF_NAME && cd ..
-        with:
-          start: make start-dev
-          wait-on: 'http://localhost:11001' # Waits for above
+          make start-dev
+        wait-on: 'http://localhost:11001' # Waits for above
