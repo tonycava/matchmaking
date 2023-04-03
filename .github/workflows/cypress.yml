@@ -17,11 +17,12 @@ jobs:
         run: |
           rm -rf back/ front/
           git submodule update --force --recursive --init --remote
+          cd back/ && git checkout $GITHUB_REF_NAME && cd ..
           cd front/ && git checkout $GITHUB_REF_NAME && cd ..
       - name: Install dependencies
         run: make install-dependencies
-      - name: Run only front container
-        run: make start-front-only
+      - name: Run docker-compose
+        run: make start-dev
       - name: Run unit tests
         run: make test-frontend
         env:
