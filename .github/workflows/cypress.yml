@@ -24,8 +24,7 @@ jobs:
         with:
           # Starts web server for E2E tests - replace with your own server invocation
           # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
-          repository: matchmaking/front
-          path: front/
+          working-directory: front/
           start: cd .. && make start-dev
           wait-on: 'http://localhost:11001' # Waits for above
           # Records to Cypress Cloud
