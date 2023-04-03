@@ -17,6 +17,8 @@ jobs:
           git submodule update --force --recursive --init --remote
       - name: cd
         run: cd front/ && git checkout $GITHUB_REF_NAME
+      - name: ls
+        run: ls -la
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
