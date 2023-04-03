@@ -39,4 +39,3 @@ jobs:
         run: |
           cd front/ && git checkout $GITHUB_REF_NAME && cd ..
           make start-dev
-        wait-on: 'http://localhost:11001' # Waits for above
