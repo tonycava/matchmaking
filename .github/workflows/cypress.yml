@@ -19,6 +19,8 @@ jobs:
           git submodule update --force --recursive --init --remote
       - name: Install dependencies
         run: make install-dependencies
+      - name: cat front
+        run: cat front/package.json
       - name: Run unit tests
         run: make test-frontend
         env:
