@@ -43,7 +43,7 @@ test-backend:
 	cd back && DATABASE_URL=${DATABASE_URL} yarn test
 
 test-frontend:
-	cd front && yarn test
+	cd front && yarn run test
 
 lint-backend:
 	cd back/ && yarn install && yarn run lint && yarn run format
