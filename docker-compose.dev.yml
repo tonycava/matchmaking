@@ -26,7 +26,7 @@ services:
       PUBLIC_API_URL: ${API_URL}
       PUBLIC_EXTERNAL_API_URL: ${EXTERNAL_API_URL}
     ports:
-      - "11001:${FRONT_END_PORT}"
+      - "11001:3000"
     volumes:
       - ./front/src:/app/src
       - ./front/.svelte-kit:/app/.svelte-kit
@@ -43,7 +43,7 @@ services:
     volumes:
       - ./back:/app
     ports:
-      - "11002:${BACK_END_PORT}"
+      - "11002:3000"
     environment:
       PORT: ${BACK_END_PORT}
       JWT_SECRET: ${JWT_SECRET}
