@@ -1,3 +1,4 @@
+
 start-dev:
 	docker-compose -f docker-compose.dev.yml down
 	docker-compose -f docker-compose.dev.yml up --build
@@ -40,9 +41,8 @@ git-merge:
 
 # TESTING
 test-backend:
-	cd back && . ../.env && JWT_SECRET=${JWT_SECRET} && DATABASE_URL=${DATABASE_URL} yarn test
+	cd back && DATABASE_URL=${DATABASE_URL} yarn test
 
-# Lint
 lint-backend:
 	cd back/ && yarn install && yarn run lint && yarn run format
 

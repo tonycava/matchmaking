@@ -1,7 +1,9 @@
 [submodule "back"]
 	path = back
 	url = https://github.com/tonycava/matchmaking-back
+	branch = main
 
 [submodule "front"]
 	path = front
 	url = https://github.com/tonycava/matchmaking-front
+	branch = main
