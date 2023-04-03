@@ -20,6 +20,8 @@ jobs:
           cd front/ && git checkout $GITHUB_REF_NAME && cd ..
       - name: Install dependencies
         run: make install-dependencies
+      - name: Run only front container
+        run: make run-frontend-only
       - name: Run unit tests
         run: make test-frontend
         env:
