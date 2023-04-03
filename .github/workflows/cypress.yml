@@ -21,6 +21,8 @@ jobs:
         run: |
           cd front/ && git checkout $GITHUB_REF_NAME && cd ..
           make lint-frontend
+      - name: pwd
+        run: pwd
       - name: Cypress run
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v4
