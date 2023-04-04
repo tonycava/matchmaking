@@ -49,6 +49,7 @@ jobs:
         with:
           # the folder where the Cypress tests are located
           working-directory: ./front
+          browser: firefox
           wait-on: 'http://localhost:11001'
           record: true
         env:
@@ -57,7 +58,6 @@ jobs:
           # re-enable PR comment bot
           COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # set the GitHub token
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
           PORT: 3000
           PUBLIC_API_URL: http://back:3000
