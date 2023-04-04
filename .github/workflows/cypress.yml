@@ -27,3 +27,7 @@ jobs:
           PORT: 3000
           PUBLIC_API_URL: http://back:3000
           PUBLIC_EXTERNAL_API_URL: http://localhost:10002
+          DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
+          POSTGRES_USER: matchmaking
+          POSTGRES_PASSWORD: matchmaking
+          POSTGRES_DB: matchmaking
