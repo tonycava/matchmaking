@@ -1,31 +1,49 @@
-name: Cypress Tests
+# name: Cypress Tests
+#on: [push]
+#jobs:
+#  cypress-run:
+#    runs-on: ubuntu-latest
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        containers: [ 1, 2]
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#      - name: Re init project
+#        run: |
+#          rm -rf back/ front/
+#          git submodule update --force --recursive --init --remote
+#          cd front/ && git checkout $GITHUB_REF_NAME && cd ..
+#      - name: Install dependencies
+#        run: make install-dependencies
+#      - name: Start container front
+#        run: make start-front-only
+#      - name: Run unit tests
+#        run: make test-frontend
+#        env:
+#          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+#          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
+#          PORT: 3000
+#          PUBLIC_API_URL: http://back:3000
+#          PUBLIC_EXTERNAL_API_URL: http://localhost:10002
+
+name: Cypress tests
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        containers: [ 1, 2]
+    name: Cypress run
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Re init project
-        run: |
-          rm -rf back/ front/
-          git submodule update --force --recursive --init --remote
-          cd front/ && git checkout $GITHUB_REF_NAME && cd ..
-      - name: Install dependencies
-        run: make install-dependencies
-      - name: Start container front
-        run: make start-front-only
-      - name: Run unit tests
-        uses: make test-frontend
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v5.x.x # use the explicit version number
         with:
-          wait-on: http://localhost:11001
+          record: true
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
-          PORT: 3000
-          PUBLIC_API_URL: http://back:3000
-          PUBLIC_EXTERNAL_API_URL: http://localhost:10002
+          # overwrite commit message sent to Cypress Cloud
+          COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
+          # re-enable PR comment bot
+          COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
