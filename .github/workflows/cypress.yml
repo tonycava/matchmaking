@@ -41,6 +41,8 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5 # use the explicit version number
         with:
+          # the folder where the Cypress tests are located
+          working-directory: ./front
           record: true
         env:
           # overwrite commit message sent to Cypress Cloud
