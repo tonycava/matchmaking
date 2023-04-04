@@ -3,9 +3,6 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    # Runs tests in parallel with matrix strategy https://docs.cypress.io/guides/guides/parallelization
-    # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
-    # Also see warning here https://github.com/cypress-io/github-action#parallel
     strategy:
       fail-fast: false
       matrix:
@@ -17,7 +14,6 @@ jobs:
         run: |
           rm -rf back/ front/
           git submodule update --force --recursive --init --remote
-          cd back/ && git checkout $GITHUB_REF_NAME && cd ..
           cd front/ && git checkout $GITHUB_REF_NAME && cd ..
       - name: Install dependencies
         run: make install-dependencies
