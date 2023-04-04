@@ -17,6 +17,8 @@ jobs:
           cd front/ && git checkout $GITHUB_REF_NAME && cd ..
       - name: Install dependencies
         run: make install-dependencies
+      - name: Start container front
+        run: make start-front-only
       - name: run front
         run: cd front/ && yarn test
       - name: Run unit tests
