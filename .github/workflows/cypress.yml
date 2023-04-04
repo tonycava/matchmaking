@@ -42,6 +42,8 @@ jobs:
          rm -rf back/ front/
          git submodule update --force --recursive --init --remote
          cd front/ && git checkout $GITHUB_REF_NAME && cd ..
+      - name: start container front
+        run: make start-front-only
       - name: Cypress run
         uses: cypress-io/github-action@v5 # use the explicit version number
         with:
@@ -56,3 +58,6 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # set the GitHub token
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
+          PORT: 3000
+          PUBLIC_API_URL: http://back:3000
+          PUBLIC_EXTERNAL_API_URL: http://localhost:10002
