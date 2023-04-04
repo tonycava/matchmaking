@@ -49,6 +49,7 @@ jobs:
         with:
           # the folder where the Cypress tests are located
           working-directory: ./front
+          wait-on: 'http://localhost:11001'
           record: true
         env:
           # overwrite commit message sent to Cypress Cloud
