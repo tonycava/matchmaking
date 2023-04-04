@@ -20,7 +20,9 @@ jobs:
       - name: Start container front
         run: make start-front-only
       - name: Run unit tests
-        run: make test-frontend
+        uses: make test-frontend
+        with:
+          wait-on: http://localhost:11001
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
