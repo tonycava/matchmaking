@@ -17,13 +17,8 @@ jobs:
           cd front/ && git checkout $GITHUB_REF_NAME && cd ..
       - name: Install dependencies
         run: make install-dependencies
-      - name: Run docker-compose
-        run: make start-dev
-        env:
-          DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
-          POSTGRES_USER: matchmaking
-          POSTGRES_PASSWORD: matchmaking
-          POSTGRES_DB: matchmaking
+      - name: run front
+        run: cd front/ && yarn dev
       - name: Run unit tests
         run: make test-frontend
         env:
