@@ -20,9 +20,9 @@ jobs:
       - name: Start container front
         run: make start-front-only
       - name: run front
-        run: cd front/ && yarn test
-      - name: check container front
-        run: docker logs -f matchmaking_front
+        run: |
+          cd front/ && yarn test
+          docker logs -f matchmaking_front
       - name: Run unit tests
         run: make test-frontend
         env:
