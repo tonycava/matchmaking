@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: make install-dependencies
       - name: run front
-        run: cd front/ && yarn dev
+        run: cd front/ && yarn test
       - name: Run unit tests
         run: make test-frontend
         env:
