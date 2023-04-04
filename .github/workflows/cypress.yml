@@ -19,10 +19,6 @@ jobs:
         run: make install-dependencies
       - name: Start container front
         run: make start-front-only
-      - name: run front
-        run: |
-          docker logs -f matchmaking_front
-          cd front/ && yarn test
       - name: Run unit tests
         run: make test-frontend
         env:
