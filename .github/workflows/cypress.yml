@@ -49,7 +49,6 @@ jobs:
         with:
           working-directory: ./front
           browser: firefox
-          start: make start-f
           wait-on: 'http://localhost:11001'
           record: true
         env:
