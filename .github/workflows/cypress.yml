@@ -141,11 +141,11 @@ jobs:
           record: false
           start: yarn run cy:open
           env:
-          # overwrite commit message sent to Cypress Cloud
-          COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
-          # re-enable PR comment bot
-          COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
-          # projetc id for cloud
-          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+            # overwrite commit message sent to Cypress Cloud
+            COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
+            # re-enable PR comment bot
+            COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
+            CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+            GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
+            # projetc id for cloud
+            CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
