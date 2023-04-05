@@ -87,7 +87,9 @@ jobs:
         run: cd front/ && yarn run build
 
       - name: Start the container front
-        run: make start-front-only &
+        run: |
+          make start-front-only &
+          curl -I http://localhost:11001
 
       - name: Wait for the server to start
         run: npx wait-on http://localhost:11001
