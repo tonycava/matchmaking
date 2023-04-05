@@ -144,9 +144,9 @@ jobs:
           sleep 100
           curl http://localhost:11001 -I
         env:
-          PORT: 3000
-          PUBLIC_API_URL: http://back:3000
-          PUBLIC_EXTERNAL_API_URL: http://localhost:3000
+          FRONT_END_PORT: 3000
+          API_URL: http://back:3000
+          EXTERNAL_API_URL: http://localhost:11002
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v5
