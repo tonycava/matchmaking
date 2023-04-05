@@ -54,7 +54,7 @@ jobs:
           browser: firefox
           headed: true
           config-file: ./front/cypress.config.ts
-          start: npm start
+          start: make test-frontend
           wait-on: 'http://localhost:11001'
           record: true
         env:
