@@ -72,11 +72,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
       - name: Install dependencies
         run: make install-dependencies
 
@@ -84,8 +79,11 @@ jobs:
         run: yarn run build
 
       - name: Start the Vite server
-        run: yarn run dev -- --port 11001 &
+        run: yarn run dev --port 11001 --
         background: true
+
+      - name: Wait for the server to start
+        run: npx wait-on http://localhost:11001
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v2
