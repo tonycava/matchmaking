@@ -93,10 +93,3 @@ jobs:
           browser: chrome
           record: false
           start: yarn run cy:open
-
-# Define the Cypress-specific configuration
-cypress:
-  baseUrl: http://localhost:11001
-  video: false
-  supportFile: cypress/support/e2e.ts
-
