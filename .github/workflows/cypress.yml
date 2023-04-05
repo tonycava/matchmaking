@@ -89,7 +89,7 @@ jobs:
       - name: Start the container front
         run: |
           make start-front-only &
-          sleep 10
+          sleep 100
           curl http://localhost:11001 -I
 
       - name: Wait for the server to start
