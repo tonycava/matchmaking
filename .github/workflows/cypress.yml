@@ -52,6 +52,9 @@ jobs:
           # the folder where the Cypress tests are located
           working-directory: ./front
           browser: firefox
+          headed: true
+          config-file: ./front/cypress.config.ts
+          start: npm start
           wait-on: 'http://localhost:11001'
           record: true
         env:
@@ -61,6 +64,7 @@ jobs:
           COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           PORT: 3000
           PUBLIC_API_URL: http://back:3000
           PUBLIC_EXTERNAL_API_URL: http://localhost:10002
