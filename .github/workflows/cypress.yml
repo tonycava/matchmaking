@@ -64,6 +64,8 @@
 #          PUBLIC_API_URL: http://back:3000
 #          PUBLIC_EXTERNAL_API_URL: http://localhost:10002
 
+name: Cypress tests
+on: [push]
 jobs:
   cypress:
     runs-on: ubuntu-latest
