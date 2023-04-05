@@ -74,6 +74,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Init fake .env
+        run: touch .env
+
       - name: Re init project
         run: |
           rm -rf back/ front/
@@ -90,7 +93,11 @@ jobs:
         run: |
           make start-front-only &
           sleep 100
-          curl https://0.0.0.0:11001 -I
+          curl http://localhost:11001 -I
+        env:
+          PORT: 3000
+          PUBLIC_API_URL: http://back:3000
+          PUBLIC_EXTERNAL_API_URL: http://localhost:3000
 
       - name: Wait for the server to start
         run: npx wait-on http://localhost:11001
@@ -111,6 +118,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
           # projetc id for cloud
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
-          PORT: 3000
-          PUBLIC_API_URL: http://back:3000
-          PUBLIC_EXTERNAL_API_URL: http://localhost:10002
