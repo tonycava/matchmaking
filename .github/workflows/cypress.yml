@@ -64,44 +64,75 @@
 #          PUBLIC_API_URL: http://back:3000
 #          PUBLIC_EXTERNAL_API_URL: http://localhost:10002
 
+# name: Cypress tests
+#on: [push]
+#jobs:
+#  cypress:
+#    runs-on: ubuntu-latest
+#
+#    # Define the steps to run in the job
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Init fake .env
+#        run: touch .env
+#
+#      - name: Re init project
+#        run: |
+#          rm -rf back/ front/
+#          git submodule update --force --recursive --init --remote
+#          cd front/ && git checkout $GITHUB_REF_NAME && cd ..
+#
+#      - name: Install dependencies
+#        run: make install-dependencies
+#
+#      - name: Build the Vite app
+#        run: cd front/ && yarn run build
+#
+#      - name: Start the container front
+#        run: |
+#          make start-front-only &
+#          sleep 100
+#          curl http://localhost:11001 -I
+#        env:
+#          PORT: 3000
+#          PUBLIC_API_URL: http://back:3000
+#          PUBLIC_EXTERNAL_API_URL: http://localhost:3000
+#
+#      - name: Wait for the server to start
+#        run: npx wait-on http://localhost:11001
+#
+#      - name: Run Cypress tests
+#        uses: cypress-io/github-action@v2
+#        with:
+#          working-directory: ./front
+#          browser: chrome
+#          record: false
+#          start: yarn run cy:open
+#        env:
+#          # overwrite commit message sent to Cypress Cloud
+#          COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
+#          # re-enable PR comment bot
+#          COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
+#          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+#          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
+#          # projetc id for cloud
+#          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+
 name: Cypress tests
 on: [push]
 jobs:
   cypress:
     runs-on: ubuntu-latest
-
-    # Define the steps to run in the job
     steps:
       - uses: actions/checkout@v2
-
-      - name: Init fake .env
-        run: touch .env
-
       - name: Re init project
         run: |
           rm -rf back/ front/
           git submodule update --force --recursive --init --remote
-          cd front/ && git checkout $GITHUB_REF_NAME && cd ..
-
+          cd front/ && git switch origin/$GITHUB_REF_NAME --detach
       - name: Install dependencies
         run: make install-dependencies
-
-      - name: Build the Vite app
-        run: cd front/ && yarn run build
-
-      - name: Start the container front
-        run: |
-          make start-front-only &
-          sleep 100
-          curl http://localhost:11001 -I
-        env:
-          PORT: 3000
-          PUBLIC_API_URL: http://back:3000
-          PUBLIC_EXTERNAL_API_URL: http://localhost:3000
-
-      - name: Wait for the server to start
-        run: npx wait-on http://localhost:11001
-
       - name: Run Cypress tests
         uses: cypress-io/github-action@v2
         with:
@@ -109,7 +140,7 @@ jobs:
           browser: chrome
           record: false
           start: yarn run cy:open
-        env:
+          env:
           # overwrite commit message sent to Cypress Cloud
           COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
           # re-enable PR comment bot
