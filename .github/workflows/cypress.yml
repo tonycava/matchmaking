@@ -25,6 +25,14 @@ jobs:
           API_URL: http://back:3000
           EXTERNAL_API_URL: http://localhost:11002
 
+      - name: wait for web server
+        run: |
+          while ! curl --output /dev/null --silent --head --fail http://localhost:3000; do
+            printf '.'
+            sleep 5
+          done
+          echo "Web server is up"
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v5
         with:
