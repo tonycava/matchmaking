@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Re init project
         run: |
           rm -rf back/ front/
@@ -38,7 +39,7 @@ jobs:
           working-directory: ./front
           browser: chrome
           record: false
-          start: yarn run test
+          start: yarn run cy:run
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
