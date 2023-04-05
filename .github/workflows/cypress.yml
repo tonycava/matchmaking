@@ -89,7 +89,8 @@ jobs:
       - name: Start the container front
         run: |
           make start-front-only &
-          curl -I http://localhost:11001
+          sleep 10
+          curl http://localhost:11001 -I
 
       - name: Wait for the server to start
         run: npx wait-on http://localhost:11001
