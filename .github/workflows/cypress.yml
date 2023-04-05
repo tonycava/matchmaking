@@ -84,7 +84,7 @@ jobs:
         run: make install-dependencies
 
       - name: Build the Vite app
-        run: yarn run build
+        run: cd front/ && yarn run build
 
       - name: Start the Vite server
         run: yarn run dev --port 11001 --host
