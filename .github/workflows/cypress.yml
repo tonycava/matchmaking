@@ -54,8 +54,7 @@ jobs:
           # the folder where the Cypress tests are located
           working-directory: ./front
           browser: firefox
-          headed: true
-          config-file: ./front/cypress.config.ts
+          build: yarn build
           start: yarn test
           wait-on: 'http://localhost:11001'
           record: true
