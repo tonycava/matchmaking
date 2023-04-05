@@ -44,17 +44,12 @@ jobs:
          cd front/ && git checkout $GITHUB_REF_NAME && cd ..
       - name: Install dependencies
         run: make install-dependencies
-      - name: start container front
-        run: make start-front-only
-      - name: docker ps
-        run: docker ps -a
       - name: Cypress run
         uses: cypress-io/github-action@v5 # use the explicit version number
         with:
           working-directory: ./front
           browser: firefox
-          build: yarn build
-          start: yarn test
+          start: make start-f
           wait-on: 'http://localhost:11001'
           record: true
         env:
