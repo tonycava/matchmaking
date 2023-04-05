@@ -90,6 +90,18 @@ jobs:
         run: |
           make start-front-only &
           curl -I http://localhost:11001
+        env:
+         # overwrite commit message sent to Cypress Cloud
+          COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
+         # re-enable PR comment bot
+          COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
+         # projetc id for cloud
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          PORT: 11001
+          PUBLIC_API_URL: http://back:11003
+          PUBLIC_EXTERNAL_API_URL: http://localhost:10002
 
       - name: Wait for the server to start
         run: npx wait-on http://localhost:11001
