@@ -46,6 +46,8 @@ jobs:
         run: make install-dependencies
       - name: start container front
         run: make start-front-only
+      - name: docker ps
+        run: docker ps -a
       - name: Cypress run
         uses: cypress-io/github-action@v5 # use the explicit version number
         with:
