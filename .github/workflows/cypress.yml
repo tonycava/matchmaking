@@ -31,7 +31,7 @@ jobs:
           working-directory: ./front
           browser: chrome
           record: false
-          start: yarn run cy:test
+          start: yarn run test
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
