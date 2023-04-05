@@ -90,7 +90,7 @@ jobs:
         run: |
           make start-front-only &
           sleep 100
-          curl http://localhost:11001 -I
+          curl http://0.0.0.0:11001 -I
 
       - name: Wait for the server to start
         run: npx wait-on http://localhost:11001
