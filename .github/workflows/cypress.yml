@@ -81,8 +81,7 @@ jobs:
         run: yarn run build
 
       - name: Start the Vite server
-        run: yarn run dev --port 11001 --
-        background: true
+        run: yarn run dev --port 11001 --host
 
       - name: Wait for the server to start
         run: npx wait-on http://localhost:11001
