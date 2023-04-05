@@ -87,9 +87,6 @@ jobs:
         run: yarn run dev -- --port 11001 &
         background: true
 
-      - name: Wait for the server to start
-        run: npx wait-on http://localhost:11001
-
       - name: Run Cypress tests
         uses: cypress-io/github-action@v2
         with:
