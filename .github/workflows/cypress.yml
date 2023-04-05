@@ -126,13 +126,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Re init project
         run: |
           rm -rf back/ front/
           git submodule update --force --recursive --init --remote
           cd front/ && git switch origin/$GITHUB_REF_NAME --detach
+
       - name: Install dependencies
         run: make install-dependencies
+
+      - name: start web server
+        run: |
+          cd front/ && yarn run build
+          cd ..
+          make start-front-only &
+          sleep 100
+          curl http://localhost:11001 -I
+        env:
+          PORT: 3000
+          PUBLIC_API_URL: http://back:3000
+          PUBLIC_EXTERNAL_API_URL: http://localhost:3000
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v5
         with:
