@@ -43,7 +43,7 @@ services:
     volumes:
       - ./back:/app
     ports:
-      - "11002:${BACK_END_PORT}"
+      - "11002:3000"
     environment:
       PORT: ${BACK_END_PORT}
       JWT_SECRET: ${JWT_SECRET}
