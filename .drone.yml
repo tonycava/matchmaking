@@ -29,7 +29,6 @@ steps:
         from_secret: POSTGRES_USER
       POSTGRES_DB:
         from_secret: POSTGRES_DB
-
       DATABASE_URL:
         from_secret: DATABASE_URL
       JWT_SECRET:
