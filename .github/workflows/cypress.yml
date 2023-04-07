@@ -1,33 +1,46 @@
-name: Cypress Tests
+name: Cypress tests
 on: [push]
 jobs:
-  cypress-run:
+  cypress:
     runs-on: ubuntu-latest
-    # Runs tests in parallel with matrix strategy https://docs.cypress.io/guides/guides/parallelization
-    # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
-    # Also see warning here https://github.com/cypress-io/github-action#parallel
-    strategy:
-      fail-fast: false # https://github.com/cypress-io/github-action/issues/48
-      matrix:
-        containers: [1, 2] # Uses 2 parallel instances
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Cypress run
-        # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
-        uses: cypress-io/github-action@v4
-        with:
-          # Starts web server for E2E tests - replace with your own server invocation
-          # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
-          start: make start-dev
-          wait-on: 'http://localhost:11001' # Waits for above
-          # Records to Cypress Cloud
-          # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
-          record: true
-          parallel: true # Runs test in parallel using settings above
+      - uses: actions/checkout@v2
+
+      - name: Re init project
+        run: |
+          rm -rf back/ front/
+          git submodule update --force --recursive --init --remote
+          cd front/ && git switch origin/$GITHUB_REF_NAME --detach
+
+      - name: Install dependencies
+        run: make install-dependencies
+
+      - name: start web server
+        run: |
+          cd front/ && yarn run build
+          cd ..
+          make start-front-only &
         env:
-          # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
-          # in GitHub repo → Settings → Secrets → Actions
+          FRONT_END_PORT: 3000
+          API_URL: http://back:3000
+          EXTERNAL_API_URL: http://localhost:11002
+
+      - name: wait for web server
+        run: |
+          while ! curl --output /dev/null --silent --head --fail http://localhost:11001; do
+            printf '.'
+            sleep 5
+          done
+          echo "Web server is up"
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          working-directory: ./front
+          browser: chrome
+          record: false
+          start: yarn run cy:run
+        env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Creating a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}

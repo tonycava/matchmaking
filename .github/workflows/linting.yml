@@ -10,6 +10,9 @@ jobs:
       - name: Lint
         uses: actions/setup-node@v2
 
+      - name: Init fake .env
+        run: touch .env
+
       - name: Re init project
         run: |
           rm -rf back/ front/
