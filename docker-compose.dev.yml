@@ -26,7 +26,7 @@ services:
       PUBLIC_API_URL: ${API_URL}
       PUBLIC_EXTERNAL_API_URL: ${EXTERNAL_API_URL}
     ports:
-      - "11001:${FRONT_END_PORT}"
+      - "11001:3000"
     volumes:
       - ./front/src:/app/src
       - ./front/.svelte-kit:/app/.svelte-kit
