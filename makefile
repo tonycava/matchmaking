@@ -16,6 +16,9 @@ setup:
 start-db-only:
 	docker-compose -f docker-compose.dev.yml up --build -d db
 
+start-front-only:
+	docker-compose -f docker-compose.dev.yml up --build -d front
+
 fix-all:
 	cd back && yarn run lint && yarn run format
 	cd front && yarn run format && yarn run lint && yarn run check
