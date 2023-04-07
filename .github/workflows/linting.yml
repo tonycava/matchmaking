@@ -1,6 +1,6 @@
 name: Lint matchmaking CI
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   lint:
@@ -9,33 +9,22 @@ jobs:
       - uses: actions/checkout@v3
       - name: Lint
         uses: actions/setup-node@v2
-        with:
-          submodules: true
-      - name: Install dependencies
-        run: touch .env && make install-dependencies
-      - name: Run linting back
-        env:
-          PA_TOKEN: ${{ secrets.PA_TOKEN }}
+
+      - name: Re init project
         run: |
-          cd back/
-          
-          git clone -b $GITHUB_REF_NAME "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-back.git" back
-          
-          cd back/ && yarn install
-          yarn run lint && yarn run format
+          rm -rf back/ front/
+          git submodule update --force --recursive --init --remote
+
+      - name: Run linting back
+        run: |
+          cd back/ && git checkout $GITHUB_REF_NAME && cd ..
+          make lint-backend
 
       - name: Run linting front
-        env:
-          PA_TOKEN: ${{ secrets.PA_TOKEN }}
         run: |
-          
-          cd front/
-          
-          git clone -b $GITHUB_REF_NAME "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-front.git" front
-          
-          cd front/ && yarn install
-          npx prettier --write .
-          yarn run lint && yarn run format
+          cd front/ && git checkout $GITHUB_REF_NAME && cd ..
+          make lint-frontend
+  
 
   back-integration-test:
     runs-on: ubuntu-latest
@@ -47,13 +36,11 @@ jobs:
           POSTGRES_PASSWORD: matchmaking
           POSTGRES_DB: matchmaking
         ports:
-            - 11000:5432
+          - 11000:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     env:
-      TEST_DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
       PA_TOKEN: ${{ secrets.PA_TOKEN }}
-      JWT_SECRET: secret
-      EXTERNAL_BACK_END_DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
       DATABASE_URL: postgres://matchmaking:matchmaking@localhost:11000/matchmaking
     steps:
       - uses: actions/checkout@v2
@@ -61,14 +48,12 @@ jobs:
         with:
           node-version: '16.x'
       - run: |
-          
           git clone "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-back.git" back
           cd back/ && git switch origin/$GITHUB_REF_NAME --detach  
 
       - name: Install dependencies
-        run: touch .env && make install-dependencies
+        run: make install-dependencies
       - name: Run integration tests back
         run: |
-          cd back/ && npx prisma db push --schema=./prisma/schema.prisma
-          cd ../ 
+          cd back/ && npx prisma db push && cd ../ 
           make test-backend
