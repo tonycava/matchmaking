@@ -10,4 +10,4 @@
 
 [submodule "shared"]
 	path = shared
-	url = git@github.com:tonycava/matchmaking-shared.git
+	url = https://github.com/tonycava/matchmaking-shared
