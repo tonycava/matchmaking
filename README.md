@@ -62,11 +62,11 @@ git clone --recurse-submodules https://github.com/tonycava/matchmaking
 ## :back: Step 2 : Go on the backend part and follow the `README.md`
 
 ```bash
-cd back/
+cd backend/
 ```
 
 ## :bullettrain_front: Step 3 : Go on the backend part and follow the `README.md`
 
 ```bash
-cd front/
+cd frontend/
 ```

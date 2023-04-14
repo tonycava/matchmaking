@@ -11,8 +11,8 @@ steps:
     commands:
       - git submodule init
       - git submodule update --recursive --remote
-      - cd back/ && git checkout main && cd ..
-      - cd front/ && git checkout main && cd ..
+      - cd backend/ && git checkout main && cd ..
+      - cd frontend/ && git checkout main && cd ..
 
   - name: stop-previous-version
     commands:

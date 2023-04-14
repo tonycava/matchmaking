@@ -19,7 +19,7 @@ services:
     container_name: matchmaking_front
     build:
       context: .
-      dockerfile: ./front/Dockerfile.prod
+      dockerfile: frontend/Dockerfile.prod
     restart: always
     environment:
       PORT: ${FRONT_END_PORT}
@@ -32,7 +32,7 @@ services:
     container_name: matchmaking_back
     build:
       context: .
-      dockerfile: ./back/Dockerfile.prod
+      dockerfile: backend/Dockerfile.prod
     restart: always
     env_file:
       - ./.env

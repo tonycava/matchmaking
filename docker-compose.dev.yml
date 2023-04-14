@@ -19,7 +19,7 @@ services:
     container_name: matchmaking_front
     build:
       context: .
-      dockerfile: ./front/Dockerfile.dev
+      dockerfile: frontend/Dockerfile.dev
     restart: always
     environment:
       PORT: ${FRONT_END_PORT}
@@ -28,20 +28,20 @@ services:
     ports:
       - "11001:3000"
     volumes:
-      - ./front/src:/app/src
-      - ./front/.svelte-kit:/app/.svelte-kit
-      - ./front/static:/app/static
-      - ./front/tailwind.config.cjs:/app/tailwind.config.cjs
+      - ./frontend/src:/app/src
+      - ./frontend/.svelte-kit:/app/.svelte-kit
+      - ./frontend/static:/app/static
+      - ./frontend/tailwind.config.cjs:/app/tailwind.config.cjs
       - ./.env:/app/.env
 
   back:
     container_name: matchmaking_back
     build:
       context: .
-      dockerfile: ./back/Dockerfile.dev
+      dockerfile: backend/Dockerfile.dev
     restart: always
     volumes:
-      - ./back:/app
+      - ./backend:/app
     ports:
       - "11002:3000"
     environment:

@@ -8,16 +8,16 @@ jobs:
 
       - name: Re init project
         run: |
-          rm -rf back/ front/
+          rm -rf backend/ frontend/
           git submodule update --force --recursive --init --remote
-          cd front/ && git switch origin/$GITHUB_REF_NAME --detach
+          cd frontend/ && git switch origin/$GITHUB_REF_NAME --detach
 
       - name: Install dependencies
         run: make install-dependencies
 
       - name: start web server
         run: |
-          cd front/ && yarn run build
+          cd frontend/ && yarn run build
           cd ..
           make start-front-only &
         env:
@@ -36,7 +36,7 @@ jobs:
       - name: Run Cypress tests
         uses: cypress-io/github-action@v5
         with:
-          working-directory: ./front
+          working-directory: ./frontend
           browser: chrome
           record: false
           start: yarn run cy:run
