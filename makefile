@@ -7,8 +7,8 @@ start-prod:
 	docker-compose -f docker-compose.prod.yml up --build
 
 install-dependencies:
-	cd ./back && yarn install
-	cd ./front && yarn install
+	cd ./backend && yarn install
+	cd ./frontend && yarn install
 
 setup:
 	make install-dependencies
@@ -16,16 +16,16 @@ setup:
 	make start-dev
 
 re-deploy-front-end:
-	cd front/ && docker build -t tonycava/matchmaking-front-k8s -f Dockerfile.prod .
+	cd frontend/ && docker build -t tonycava/matchmaking-front-k8s -f Dockerfile.prod .
 	docker push tonycava/matchmaking-front-k8s
-	kubectl delete -f front/k8s/deployment.yml || true
-	kubectl -f front/k8s/deployment.yml create
+	kubectl delete -f frontend/k8s/deployment.yml || true
+	kubectl -f frontend/k8s/deployment.yml create
 
 re-deploy-back-end:
-	cd back/ && docker build -t tonycava/matchmaking-back-k8s -f Dockerfile.prod .
+	cd backend/ && docker build -t tonycava/matchmaking-back-k8s -f Dockerfile.prod .
 	docker push tonycava/matchmaking-back-k8s
-	kubectl delete -f back/k8s/deployment.yml || true
-	kubectl -f back/k8s/deployment.yml create
+	kubectl delete -f backend/k8s/deployment.yml || true
+	kubectl -f backend/k8s/deployment.yml create
 
 start-db-only:
 	docker-compose -f docker-compose.dev.yml up --build -d db
@@ -39,29 +39,29 @@ db-push:
 # GIT
 git-create-branch:
 	git checkout -b $(branch) | true
-	cd front && git checkout -b $(branch) | true
-	cd back && git checkout -b $(branch) | true
+	cd frontend/ && git checkout -b $(branch) | true
+	cd backend/ && git checkout -b $(branch) | true
 
 git-checkout:
 	git checkout $(branch)
-	cd front && git checkout $(branch)
-	cd back && git checkout $(branch)
+	cd frontend/ && git checkout $(branch)
+	cd backend/ && git checkout $(branch)
 
 git-merge:
 	git checkout $(into) && git merge $(from)
-	cd front && git checkout $(into) && git merge $(from)
-	cd back && git checkout $(into) && git merge $(from)
+	cd frontend/ && git checkout $(into) && git merge $(from)
+	cd backend/ && git checkout $(into) && git merge $(from)
 
 fix-all:
 	make lint-backend
 	make lint-frontend
 
 lint-backend:
-	cd back/ && yarn install && yarn run lint && yarn run format
+	cd backend/ && yarn install && yarn run lint && yarn run format
 
 lint-frontend:
-	cd front/ && yarn install && yarn run format && yarn run lint && yarn run check
+	cd frontend/ && yarn install && yarn run format && yarn run lint && yarn run check
 
 # TESTING
 test-backend:
-	cd back && DATABASE_URL=${DATABASE_URL} yarn test
+	cd backend/ && DATABASE_URL=${DATABASE_URL} yarn test
