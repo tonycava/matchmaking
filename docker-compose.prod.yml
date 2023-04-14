@@ -26,7 +26,7 @@ services:
       PUBLIC_API_URL: ${API_URL}
       PUBLIC_EXTERNAL_API_URL: ${EXTERNAL_API_URL}
     ports:
-      - 8089:${FRONT_END_PORT}
+      - "8089:3000"
 
   back:
     container_name: matchmaking_back
@@ -34,10 +34,8 @@ services:
       context: .
       dockerfile: backend/Dockerfile.prod
     restart: always
-    env_file:
-      - ./.env
     ports:
-      - 8090:${BACK_END_PORT}
+      - "8090:3000"
     environment:
       PORT: ${BACK_END_PORT}
       JWT_SECRET: ${JWT_SECRET}
