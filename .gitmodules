@@ -7,3 +7,8 @@
 	path = front
 	url = https://github.com/tonycava/matchmaking-front
 	branch = main
+
+[submodule "shared"]
+	path = shared
+	url = https://github.com/tonycava/matchmaking-shared.git
+	branch = main
