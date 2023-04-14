@@ -6,6 +6,18 @@ export type Chat = {
 	user: { username: string };
 };
 
+export enum WEB_SOCKET_EVENT {
+	CONNECT = 'connect',
+	LEAVE_WAITING = 'leaveWaiting',
+	JOIN_GAME = 'joinGame',
+	JOIN_WAITING = 'joinWaiting',
+	UPDATE = 'update',
+	PLAY = 'play',
+	CHAT = 'chat',
+	NEW_MESSAGE = 'newMessage',
+	PARTNER = 'partner'
+}
+
 export type Range = {
 	start: number;
 	end: number;
@@ -18,7 +30,9 @@ export type Game = {
 	timerRev: number;
 	players: [string, string];
 	whoWin: [Some, Some, Some];
-	actualPlay: Record<string, Move | string>;
+	actualPlay: {
+		[player: string]: string | Move
+	};
 };
 
 export type Some = string | null;
