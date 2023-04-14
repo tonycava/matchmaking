@@ -1,6 +1,6 @@
 [submodule "backend"]
 	path = backend
-	url = https://github.com/tonycava/matchmaking-back
+	url = https://github.com/tonycava/matchmaking-back.git
 	branch = main
 
 [submodule "frontend"]
