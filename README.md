@@ -70,3 +70,25 @@ cd backend/
 ```bash
 cd frontend/
 ```
+
+## 📝 Launching the app
+
+<hr>
+
+## :pencil2: Step 1: Fill the env variable
+
+```bash
+ cp .env.example .env
+```
+
+## :computer: Step 2: If you want to develop the app :
+
+```bash
+make start-dev
+```
+
+## 🌐 Step 3: If you want to lauch the app for production :
+
+```bash
+make start-prod
+```
