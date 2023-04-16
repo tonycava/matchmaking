@@ -12,6 +12,7 @@ jobs:
           git submodule update --force --recursive --init --remote
           cd frontend/ && git switch origin/$GITHUB_REF_NAME --detach
 
+
       - name: start web server
         run: make start-front-only
         env:
