@@ -19,8 +19,7 @@ jobs:
         run: |
           cd frontend/ && yarn run build
           cd ..
-          make start-front-only &
-          docker logs -f matchmaking_front
+          make start-front-onl
         env:
           FRONT_END_PORT: 3000
           API_URL: http://back:3000
