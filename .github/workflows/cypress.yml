@@ -17,8 +17,7 @@ jobs:
 
       - name: start web server
         run: |
-          cd frontend/ && yarn run build
-          cd ..
+          ls -la frontend/
           make start-front-only
 
         env:
