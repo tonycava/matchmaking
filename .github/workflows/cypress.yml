@@ -8,7 +8,7 @@ jobs:
 
       - name: Re init project
         run: |
-          rm -rf backend/ frontend/
+          rm -rf backend/ frontend/ shared/
           git submodule update --force --recursive --init --remote
           cd frontend/ && git switch origin/$GITHUB_REF_NAME --detach
 
