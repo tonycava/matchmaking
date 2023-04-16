@@ -19,7 +19,7 @@ jobs:
         run: |
           cd frontend/ && yarn run build
           cd ..
-          make start-front-onl
+          make start-front-only
         env:
           FRONT_END_PORT: 3000
           API_URL: http://back:3000
