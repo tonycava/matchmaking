@@ -59,13 +59,13 @@ https://kubernetes.io/docs/tasks/tools/
 git clone --recurse-submodules https://github.com/tonycava/matchmaking
 ```
 
-## :back: Step 2 : Go on the backend part and follow the `README.md`
+## :back: Step 2 : Go on the backend part and follow the `README.md` if you want to only run the backend part
 
 ```bash
 cd backend/
 ```
 
-## :bullettrain_front: Step 3 : Go on the backend part and follow the `README.md`
+## :bullettrain_front: Step 3 : Go on the backend part and follow the `README.md` if you want to only run the frontend part
 
 ```bash
 cd frontend/
