@@ -24,8 +24,8 @@ jobs:
         with:
           wait-on: http://localhost:8089
           working-directory: ./frontend
-          browser: chrome
-          record: false
+          browser: electron
+          record: true
           start: yarn run cy:run
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
