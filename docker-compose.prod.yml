@@ -18,28 +18,28 @@ services:
   front:
     container_name: matchmaking_front
     build:
-      context: ./front
-      dockerfile: Dockerfile.prod
+      context: .
+      dockerfile: frontend/Dockerfile.prod
     restart: always
     environment:
       PORT: ${FRONT_END_PORT}
       PUBLIC_API_URL: ${API_URL}
       PUBLIC_EXTERNAL_API_URL: ${EXTERNAL_API_URL}
     ports:
-      - "8089:${FRONT_END_PORT}"
+      - "8089:3000"
 
   back:
     container_name: matchmaking_back
     build:
-      context: ./back
-      dockerfile: Dockerfile.prod
+      context: .
+      dockerfile: backend/Dockerfile.prod
     restart: always
     ports:
-      - "8090:${BACK_END_PORT}"
+      - "8090:3000"
     environment:
       PORT: ${BACK_END_PORT}
       JWT_SECRET: ${JWT_SECRET}
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${BACK_END_DATABASE_URL}
 
 
 volumes:

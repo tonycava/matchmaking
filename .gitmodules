@@ -1,9 +1,14 @@
-[submodule "back"]
-	path = back
-	url = https://github.com/tonycava/matchmaking-back
+[submodule "backend"]
+	path = backend
+	url = https://github.com/tonycava/matchmaking-back.git
 	branch = main
 
-[submodule "front"]
-	path = front
+[submodule "frontend"]
+	path = frontend
 	url = https://github.com/tonycava/matchmaking-front
+	branch = main
+
+[submodule "shared"]
+	path = shared
+	url = https://github.com/tonycava/matchmaking-shared
 	branch = main

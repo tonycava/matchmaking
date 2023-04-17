@@ -11,8 +11,8 @@ steps:
     commands:
       - git submodule init
       - git submodule update --recursive --remote
-      - cd back/ && git checkout main && cd ..
-      - cd front/ && git checkout main && cd ..
+      - cd backend/ && git checkout main && cd ..
+      - cd frontend/ && git checkout main && cd ..
 
   - name: stop-previous-version
     commands:
@@ -20,7 +20,7 @@ steps:
 
   - name: deploy
     commands:
-      - docker compose -f docker-compose.prod.yml up -d --build
+      - docker compose -f docker-compose.prod.yml up -d
 
     environment:
       POSTGRES_PASSWORD:
@@ -29,7 +29,6 @@ steps:
         from_secret: POSTGRES_USER
       POSTGRES_DB:
         from_secret: POSTGRES_DB
-
       DATABASE_URL:
         from_secret: DATABASE_URL
       JWT_SECRET:
