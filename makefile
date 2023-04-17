@@ -31,7 +31,7 @@ start-db-only:
 	docker-compose -f docker-compose.prod.yml up --build -d db
 
 start-front-only:
-	docker-compose -f docker-compose.dev.yml up --build -d front
+	docker-compose -f docker-compose.prod.yml up --build -d front
 
 db-push:
 	docker exec -it matchmaking_back sh -c "yarn exec prisma db push"
@@ -65,6 +65,3 @@ lint-frontend:
 # TESTING
 test-backend:
 	cd backend/ && DATABASE_URL=${DATABASE_URL} yarn test
-
-test-frontend:
-	cd frontend/ && yarn run test
