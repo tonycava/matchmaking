@@ -16,13 +16,13 @@ setup:
 	make start-dev
 
 re-deploy-front-end:
-	cd frontend/ && docker build -t tonycava/matchmaking-front-k8s -f Dockerfile.prod .
+	cd frontend/ && docker build -t tonycava/matchmaking-front-k8s -f Dockerfile.prod ..
 	docker push tonycava/matchmaking-front-k8s
 	kubectl delete -f frontend/k8s/deployment.yml || true
 	kubectl -f frontend/k8s/deployment.yml create
 
 re-deploy-back-end:
-	cd backend/ && docker build -t tonycava/matchmaking-back-k8s -f Dockerfile.prod .
+	cd backend/ && docker build -t tonycava/matchmaking-back-k8s -f Dockerfile.prod ..
 	docker push tonycava/matchmaking-back-k8s
 	kubectl delete -f backend/k8s/deployment.yml || true
 	kubectl -f backend/k8s/deployment.yml create
