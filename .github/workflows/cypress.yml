@@ -20,7 +20,7 @@ jobs:
           EXTERNAL_API_URL: http://localhost:8090
           BACK_END_PORT: 3000
           JWT_SECRET: secret
-          BACK_END_DATABASE_URL: postgres://matchmaking:matchmaking@db:5432/matchmaking
+          DATABASE_URL: postgres://matchmaking:matchmaking@db:5432/matchmaking
           POSTGRES_USER: matchmaking
           POSTGRES_PASSWORD: matchmaking
           POSTGRES_DB: matchmaking
