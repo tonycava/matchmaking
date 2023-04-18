@@ -33,6 +33,9 @@ start-db-only:
 start-front-only:
 	docker-compose -f docker-compose.prod.yml up --build -d front
 
+start-back-only:
+	docker-compose -f docker-compose.prod.yml up --build -d back
+
 db-push:
 	docker exec -it matchmaking_back sh -c "yarn exec prisma db push"
 
