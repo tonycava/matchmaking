@@ -39,7 +39,7 @@ services:
     environment:
       PORT: ${BACK_END_PORT}
       JWT_SECRET: ${JWT_SECRET}
-      DATABASE_URL: ${BACK_END_DATABASE_URL}
+      DATABASE_URL: ${DATABASE_URL}
 
 
 volumes:

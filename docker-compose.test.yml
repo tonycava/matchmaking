@@ -33,6 +33,8 @@ services:
       - ./frontend/static:/app/static
       - ./frontend/tailwind.config.cjs:/app/tailwind.config.cjs
       - ./.env:/app/.env
+    command:
+      - test
 
   back:
     container_name: matchmaking_back
@@ -47,7 +49,9 @@ services:
     environment:
       PORT: ${BACK_END_PORT}
       JWT_SECRET: ${JWT_SECRET}
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${BACK_END_DATABASE_URL}
+    command:
+      - test:docker
 
 volumes:
   matchmaking-vol:
