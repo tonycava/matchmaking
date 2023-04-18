@@ -13,7 +13,7 @@ jobs:
           cd frontend/ && git switch origin/$GITHUB_REF_NAME --detach
 
       - name: start web server
-        run: make start-prod
+        run: make start-dev
         env:
           FRONT_END_PORT: 3000
           API_URL: http://back:3000
@@ -24,6 +24,7 @@ jobs:
           POSTGRES_USER: matchmaking
           POSTGRES_PASSWORD: matchmaking
           POSTGRES_DB: matchmaking
+          ENVIRONMENT: test
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v5
