@@ -14,6 +14,7 @@ steps:
       - cd backend/ && git checkout main && cd ..
       - cd frontend/ && git checkout main && cd ..
 
+
   - name: stop-previous-version
     commands:
       - docker compose -f docker-compose.prod.yml down | true
