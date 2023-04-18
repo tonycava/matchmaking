@@ -4,7 +4,7 @@ start-dev:
 
 start-prod:
 	docker-compose -f docker-compose.prod.yml down
-	docker-compose -f docker-compose.prod.yml up --build
+	docker-compose -f docker-compose.prod.yml up --build -d
 
 install-dependencies:
 	cd ./backend && yarn install
