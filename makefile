@@ -6,6 +6,10 @@ start-prod:
 	docker-compose -f docker-compose.prod.yml down
 	docker-compose -f docker-compose.prod.yml up --build -d
 
+start-test:
+	docker-compose -f docker-compose.test.yml down
+	docker-compose -f docker-compose.test.yml up --build
+
 install-dependencies:
 	cd ./backend && yarn install
 	cd ./frontend && yarn install
