@@ -13,7 +13,7 @@ jobs:
           cd frontend/ && git switch origin/$GITHUB_REF_NAME --detach
 
       - name: start web server
-        run: make start-dev
+        run: make start-prod
         env:
           FRONT_END_PORT: 3000
           API_URL: http://back:3000

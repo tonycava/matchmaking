@@ -25,6 +25,7 @@ services:
       PORT: ${FRONT_END_PORT}
       PUBLIC_API_URL: ${API_URL}
       PUBLIC_EXTERNAL_API_URL: ${EXTERNAL_API_URL}
+      ENVIROMENT: ${ENVIRONMENT}
     ports:
       - "8089:3000"
 
@@ -40,6 +41,7 @@ services:
       PORT: ${BACK_END_PORT}
       JWT_SECRET: ${JWT_SECRET}
       DATABASE_URL: ${DATABASE_URL}
+      ENVIROMENT: ${ENVIRONMENT}
 
 
 volumes:
