@@ -21,7 +21,7 @@ steps:
 
   - name: deploy
     commands:
-      - docker compose -f docker-compose.prod.yml up -d
+      - docker compose -f docker-compose.prod.yml up -d --build
 
     environment:
       POSTGRES_PASSWORD:
