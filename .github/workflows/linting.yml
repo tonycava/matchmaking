@@ -48,15 +48,13 @@ jobs:
         with:
           node-version: '16.x'
       - run: |
-          git clone "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-shared.git" shared
-          cd shared/ && git switch origin/$GITHUB_REF_NAME --detach && cd .. 
-          
-          git clone "https://"$PA_TOKEN"@github.com/tonycava/matchmaking-back.git" backend
-          cd backend/ && git switch origin/$GITHUB_REF_NAME --detach  
+          rm -rf backend/ frontend/ shared/
+          git submodule update --force --recursive --init --remote
 
       - name: Install dependencies
         run: make install-dependencies
       - name: Run integration tests backend
         run: |
+          ls backend/
           cd backend/ && npx prisma db push && cd ../ 
           make test-backend
