@@ -18,14 +18,14 @@ setup:
 re-deploy-front-end:
 	cd frontend/ && docker build -t tonycava/matchmaking-front-k8s -f Dockerfile.prod ..
 	docker push tonycava/matchmaking-front-k8s
-	kubectl delete -f frontend/k8s/deployment.yml || true
-	kubectl -f frontend/k8s/deployment.yml create
+	kubectl patch deployment matchmaking-front-k8s -p \
+      "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 
 re-deploy-back-end:
 	cd backend/ && docker build -t tonycava/matchmaking-back-k8s -f Dockerfile.prod ..
 	docker push tonycava/matchmaking-back-k8s
-	kubectl delete -f backend/k8s/deployment.yml || true
-	kubectl -f backend/k8s/deployment.yml create
+	kubectl patch deployment matchmaking-back-k8s -p \
+      "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 
 start-db-only:
 	docker-compose -f docker-compose.prod.yml up --build -d db
