@@ -55,5 +55,6 @@ jobs:
         run: make install-dependencies
       - name: Run integration tests backend
         run: |
+          
           cd backend/ && npx prisma db push && cd ../ 
           make test-backend
