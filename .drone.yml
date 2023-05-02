@@ -44,4 +44,3 @@ steps:
         from_secret: API_URL
       EXTERNAL_API_URL:
         from_secret: EXTERNAL_API_URL
-
