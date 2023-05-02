@@ -13,7 +13,6 @@ steps:
       - git submodule update --recursive --remote
       - cd backend/ && git checkout main && cd ..
       - cd frontend/ && git checkout main && cd ..
-      - cat ./frontend/src/routes/\(protected\)/profile/+layout.svelte
 
   - name: stop-previous-version
     commands:
